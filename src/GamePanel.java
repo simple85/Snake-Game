@@ -156,11 +156,28 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         }
         //checks if head touches border
-        if(x[0] < 0 || x[0] > SCREEN_WIDTH || y[0] < 0 || y[0] > SCREEN_HEIGHT) {
+/*        if(x[0] < 0 || x[0] > SCREEN_WIDTH || y[0] < 0 || y[0] > SCREEN_HEIGHT) {
             running = false;
-        }
+        }*/
         if(!running) {
             timer.stop();
+        }
+    }
+    public void checkWallJump() {
+        if(x[0]<0) {
+                x[0] = SCREEN_WIDTH;  // set x position
+
+        }
+        else if(x[0]> SCREEN_WIDTH) {
+                x[0] = 0;  // set x position
+
+        }
+        else if(y[0]<0) {
+                y[0] = SCREEN_HEIGHT;  // set y position
+
+        }
+        else if(y[0]> SCREEN_HEIGHT) {
+                y[0] = 0;  // set y position
         }
     }
     public void gameOver(Graphics g) {
@@ -183,6 +200,7 @@ public class GamePanel extends JPanel implements ActionListener {
             checkApple();
             checkFood();
             checkCollisions();
+            checkWallJump();
             gameScore = (applesEaten*5) + foodEaten;
         }
         repaint();
